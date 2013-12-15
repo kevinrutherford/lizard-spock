@@ -1,5 +1,8 @@
 Bundler.require
 
+task :spec do
+end
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 desc 'Push to github'
