@@ -7,7 +7,7 @@ end
 
 desc 'Push to github'
 task :push => [:spec] do
-  sh 'git push'
+  # sh 'git push'
 end
 
 desc 'Deploy to Heroku'
