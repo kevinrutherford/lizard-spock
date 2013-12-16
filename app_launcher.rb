@@ -7,16 +7,16 @@ class LizardSpock < Sinatra::Base
     enable :logging
   end
 
-  post '/start' do
+  post '/Start' do
     redis.set('started', Time.now.to_s)
   end
 
-  get '/move' do
+  get '/Move' do
     redis.set('started', Time.now.to_s)
     'ROCK'
   end
 
-  post '/move' do
+  post '/Move' do
     request.body.rewind
     body = request.body.read
     redis.set('last_move', Time.now.to_s)
