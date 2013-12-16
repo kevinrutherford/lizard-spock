@@ -19,12 +19,13 @@ class LizardSpock < Sinatra::Base
   post '/move' do
     request.body.rewind
     body = request.body.read
+    redis.set('last_move', Time.now.to_s)
     redis.set('last_body', body)
     redis.set('params', params.inspect)
   end
 
   get '/' do
-    "#{redis.get('started')} -- #{redis.get('params')} -- #{redis.get('last_body')}"
+    "#{redis.get('started')} -- #{redis.get('params')} -- #{redis.get('last_move')} -- #{redis.get('last_body')}"
   end
 
   def redis
