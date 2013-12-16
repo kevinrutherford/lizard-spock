@@ -1,5 +1,13 @@
 require 'sinatra/base'
 
+
+configure do
+  require 'redis'
+  redisUri = ENV["REDISTOGO_URL"] || 'redis://localhost:6379'
+  uri = URI.parse(redisUri)
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+end
+
 class LizardSpock < Sinatra::Base
 
   configure :production, :development do
@@ -24,10 +32,11 @@ class LizardSpock < Sinatra::Base
     body = request.body.read
     puts "=== /move === request.body = #{body.inspect}"
     puts "=== /move === request.form_data? = #{request.form_data?}"
+    REDIS.set('last_body', body)
   end
 
   get '/' do
-    puts 'Hello'
+    REDIS.get('last_body')
   end
 
   # start the server if ruby file executed directly
