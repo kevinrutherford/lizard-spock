@@ -12,11 +12,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/start' do
-    puts "=== /start === #{params.inspect}"
-    request.body.rewind
-    body = request.body.read
-    puts "=== /start === request.body = #{body.inspect}"
-    puts "=== /start === request.form_data? = #{request.form_data?}"
+    REDIS.set('started', Time.now.to_s)
   end
 
   get '/move' do
@@ -24,16 +20,13 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/move' do
-    puts "=== /move === #{params.inspect}"
     request.body.rewind
     body = request.body.read
-    puts "=== /move === request.body = #{body.inspect}"
-    puts "=== /move === request.form_data? = #{request.form_data?}"
     REDIS.set('last_body', body)
   end
 
   get '/' do
-    REDIS.get('last_body')
+    "#{REDIS.get('started')} -- #{REDIS.get('last_body')}"
   end
 
   # start the server if ruby file executed directly
