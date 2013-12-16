@@ -1,32 +1,36 @@
 require 'sinatra/base'
+require 'redis'
 
 class LizardSpock < Sinatra::Base
 
   configure :production, :development do
     enable :logging
-
-    require 'redis'
-    redisUri = ENV["REDISTOGO_URL"] || 'redis://localhost:6379'
-    uri = URI.parse(redisUri)
-    REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
 
   post '/start' do
-    REDIS.set('started', Time.now.to_s)
+    redis.set('started', Time.now.to_s)
   end
 
   get '/move' do
+    redis.set('started', Time.now.to_s)
     'ROCK'
   end
 
   post '/move' do
     request.body.rewind
     body = request.body.read
-    REDIS.set('last_body', body)
+    redis.set('last_body', body)
   end
 
   get '/' do
-    "#{REDIS.get('started')} -- #{REDIS.get('last_body')}"
+    "#{redis.get('started')} -- #{redis.get('last_body')}"
+  end
+
+  def redis
+    return @redis if @redis
+    redisUri = ENV["REDISTOGO_URL"] || 'redis://redistogo:ed15feea87864017f037cf2fc1eec0d3@albacore.redistogo.com:9272/' || 'redis://localhost:6379'
+    uri = URI.parse(redisUri)
+    @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
 
   # start the server if ruby file executed directly
