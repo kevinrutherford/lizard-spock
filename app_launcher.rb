@@ -12,25 +12,23 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/Move' do
-    redis.set('started', Time.now.to_s)
     'ROCK'
   end
 
   post '/Move' do
-    request.body.rewind
-    body = request.body.read
-    redis.set('last_move', Time.now.to_s)
-    redis.set('last_body', body)
-    redis.set('params', params.inspect)
+    move = params["lastOpponentMove"]
+    moves = redis.get('moves') || ''
+    moves = moves + ',' + move
+    redis.set('moves', moves)
   end
 
   get '/' do
-    "#{redis.get('started')} -- #{redis.get('params')} -- #{redis.get('last_move')} -- #{redis.get('last_body')}"
+    "#{redis.get('started')} -- #{redis.get('moves')}"
   end
 
   def redis
     return @redis if @redis
-    redisUri = ENV["REDISTOGO_URL"] || 'redis://redistogo:ed15feea87864017f037cf2fc1eec0d3@albacore.redistogo.com:9272/' || 'redis://localhost:6379'
+    redisUri = ENV["REDISTOGO_URL"] || 'redis://localhost:6379'
     uri = URI.parse(redisUri)
     @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
