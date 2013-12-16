@@ -4,6 +4,7 @@ source 'http://rubygems.org'
 
 gem 'rake'
 gem 'sinatra'
+gem 'redis'
 
 group :development, :test do
   gem 'rspec'

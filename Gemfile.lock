@@ -16,6 +16,7 @@ GEM
     rack-protection (1.5.1)
       rack
     rake (10.1.0)
+    redis (3.0.6)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -44,6 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   rake
+  redis
   rspec
   shoulda
   sinatra
