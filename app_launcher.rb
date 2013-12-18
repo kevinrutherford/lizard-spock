@@ -12,7 +12,7 @@ class LizardSpock < Sinatra::Base
   end
 
   get %r{^/move$}i do
-    'ROCK'
+    ['ROCK', 'PAPER', 'SCISSORS'][Random.new.rand(3)]
   end
 
   post %r{^/move$}i do
