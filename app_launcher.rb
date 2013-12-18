@@ -9,6 +9,7 @@ class LizardSpock < Sinatra::Base
 
   post %r{^/start$}i do
     redis.set('started', Time.now.to_s)
+    redis.set('moves', '')
   end
 
   get %r{^/move$}i do
