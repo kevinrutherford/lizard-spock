@@ -22,7 +22,7 @@ class LizardSpock < Sinatra::Base
     log_opponents_move(move)
   end
 
-  get '/' do
+  get '/random' do
     "#{game_log}"
   end
 
@@ -38,21 +38,21 @@ class LizardSpock < Sinatra::Base
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   def clear_history
-    redis.set('moves', '')
+    redis.set('random/moves', '')
   end
 
   def log_my_move(move)
-    redis.set('my_last_move', move)
+    redis.set('random/my_last_move', move)
   end
 
   def log_opponents_move(move)
-    history = redis.get('moves') || ''
+    history = redis.get('random/moves') || ''
     moves = history + ',' + move
-    redis.set('moves', history)
+    redis.set('random/moves', history)
   end
 
   def game_log
-    redis.get('moves')
+    redis.get('random/moves')
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
