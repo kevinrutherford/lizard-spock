@@ -8,24 +8,25 @@ class LizardSpock < Sinatra::Base
   end
 
   post %r{^/random/start$}i do
-    redis.set('started', Time.now.to_s)
-    redis.set('moves', '')
+    clear_history
   end
 
   get %r{^/random/move$}i do
-    ['ROCK', 'PAPER', 'SCISSORS'][Random.new.rand(3)]
+    my_move = ['ROCK', 'PAPER', 'SCISSORS'][Random.new.rand(3)]
+    log_my_move(my_move)
+    my_move
   end
 
   post %r{^/random/move$}i do
     move = params["lastOpponentMove"]
-    moves = redis.get('moves') || ''
-    moves = moves + ',' + move
-    redis.set('moves', moves)
+    log_opponents_move(move)
   end
 
   get '/' do
-    "#{redis.get('started')} -- #{redis.get('moves')}"
+    "#{game_log}"
   end
+
+  #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   def redis
     return @redis if @redis
@@ -33,6 +34,28 @@ class LizardSpock < Sinatra::Base
     uri = URI.parse(redisUri)
     @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
+
+  #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  def clear_history
+    redis.set('moves', '')
+  end
+
+  def log_my_move(move)
+    redis.set('my_last_move', move)
+  end
+
+  def log_opponents_move(move)
+    history = redis.get('moves') || ''
+    moves = history + ',' + move
+    redis.set('moves', history)
+  end
+
+  def game_log
+    redis.get('moves'
+  end
+
+  #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   # start the server if ruby file executed directly
   run! if app_file == $0
