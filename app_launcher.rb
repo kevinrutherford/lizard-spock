@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'redis'
+require_relative 'random_bot'
 
 class LizardSpock < Sinatra::Base
 
@@ -8,22 +9,19 @@ class LizardSpock < Sinatra::Base
   end
 
   post %r{^/random/start$}i do
-    clear_history
+    RandomBot.new(redis).start
   end
 
   get %r{^/random/move$}i do
-    my_move = ['ROCK', 'PAPER', 'SCISSORS'][Random.new.rand(3)]
-    log_my_move(my_move)
-    my_move
+    RandomBot.new(redis).move
   end
 
   post %r{^/random/move$}i do
-    move = params["lastOpponentMove"]
-    log_opponents_move(move)
+    RandomBot.new(redis).opponents_move(params["lastOpponentMove"])
   end
 
   get '/random' do
-    "#{game_log}"
+    "#{RandomBot.new(redis).game_log}"
   end
 
   get '/' do
@@ -45,24 +43,8 @@ class LizardSpock < Sinatra::Base
     end
   end
 
-  #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  def clear_history
-    redis.set('random/moves', '')
-  end
-
-  def log_my_move(move)
-    redis.set('random/my_last_move', move)
-  end
-
-  def log_opponents_move(move)
-    history = redis.get('random/moves') || ''
-    history = history + ',' + move
-    redis.set('random/moves', history)
-  end
-
-  def game_log
-    redis.get('random/moves')
+  def bots
+    @bots ||= {}
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
