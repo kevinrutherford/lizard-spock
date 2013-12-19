@@ -52,7 +52,7 @@ class LizardSpock < Sinatra::Base
   end
 
   def game_log
-    redis.get('moves'
+    redis.get('moves')
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
