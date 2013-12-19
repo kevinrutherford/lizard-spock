@@ -20,7 +20,7 @@ class LizardSpock < Sinatra::Base
     bot(params[:bot_name]).opponents_move(params["lastOpponentMove"])
   end
 
-  get '/:bot_name' do
+  get '/:bot_name/log' do
     "#{bot(params[:bot_name]).game_log}"
   end
 
@@ -44,9 +44,11 @@ class LizardSpock < Sinatra::Base
   end
 
   def bot(name)
-    @bots ||= {
-      'random' => RandomBot.new(redis)
-    }
+    if @bots.nil?
+      @bots = {
+        'random' => RandomBot.new(redis)
+      }
+    end
     @bots[name]
   end
 
