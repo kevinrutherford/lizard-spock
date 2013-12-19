@@ -8,20 +8,20 @@ class LizardSpock < Sinatra::Base
     enable :logging
   end
 
-  post %r{^/random/start$}i do
-    RandomBot.new(redis).start
+  post '/:bot_name/start' do
+    bot(params[:bot_name]).start
   end
 
-  get %r{^/random/move$}i do
-    RandomBot.new(redis).move
+  get '/:bot_name/move' do
+    bot(params[:bot_name]).move
   end
 
-  post %r{^/random/move$}i do
-    RandomBot.new(redis).opponents_move(params["lastOpponentMove"])
+  post '/:bot_name/move' do
+    bot(params[:bot_name]).opponents_move(params["lastOpponentMove"])
   end
 
-  get '/random' do
-    "#{RandomBot.new(redis).game_log}"
+  get '/:bot_name' do
+    "#{bot(params[:bot_name]).game_log}"
   end
 
   get '/' do
@@ -43,8 +43,11 @@ class LizardSpock < Sinatra::Base
     end
   end
 
-  def bots
-    @bots ||= {}
+  def bot(name)
+    @bots ||= {
+      'random' => RandomBot.new(redis)
+    }
+    @bots[name]
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
