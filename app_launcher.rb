@@ -26,6 +26,10 @@ class LizardSpock < Sinatra::Base
     "#{game_log}"
   end
 
+  get '/' do
+    '<a href="/random">Random</a>'
+  end
+
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   def redis
@@ -47,7 +51,7 @@ class LizardSpock < Sinatra::Base
 
   def log_opponents_move(move)
     history = redis.get('random/moves') || ''
-    moves = history + ',' + move
+    history = history + ',' + move
     redis.set('random/moves', history)
   end
 
