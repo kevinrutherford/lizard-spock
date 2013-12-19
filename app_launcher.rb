@@ -36,7 +36,13 @@ class LizardSpock < Sinatra::Base
     return @redis if @redis
     redisUri = ENV["REDISTOGO_URL"] || 'redis://localhost:6379'
     uri = URI.parse(redisUri)
-    @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+    begin
+      @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+      @redis.keys
+    rescue
+      require_relative 'hash_store'
+      @redis = HashStore.new
+    end
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
