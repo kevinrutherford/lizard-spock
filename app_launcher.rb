@@ -7,16 +7,16 @@ class LizardSpock < Sinatra::Base
     enable :logging
   end
 
-  post %r{^/start$}i do
+  post %r{^/random/start$}i do
     redis.set('started', Time.now.to_s)
     redis.set('moves', '')
   end
 
-  get %r{^/move$}i do
+  get %r{^/random/move$}i do
     ['ROCK', 'PAPER', 'SCISSORS'][Random.new.rand(3)]
   end
 
-  post %r{^/move$}i do
+  post %r{^/random/move$}i do
     move = params["lastOpponentMove"]
     moves = redis.get('moves') || ''
     moves = moves + ',' + move
