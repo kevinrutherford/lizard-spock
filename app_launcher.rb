@@ -17,7 +17,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/move' do
-    bot(params[:bot_name]).opponents_move(params["lastOpponentMove"])
+    bot(params[:bot_name]).opponents_move(params['lastOpponentMove'])
   end
 
   get '/:bot_name/log' do
@@ -32,7 +32,7 @@ class LizardSpock < Sinatra::Base
 
   def redis
     return @redis if @redis
-    redisUri = ENV["REDISTOGO_URL"] || 'redis://localhost:6379'
+    redisUri = ENV['REDISTOGO_URL'] || 'redis://localhost:6379'
     uri = URI.parse(redisUri)
     begin
       @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
@@ -41,6 +41,7 @@ class LizardSpock < Sinatra::Base
       require_relative 'hash_store'
       @redis = HashStore.new
     end
+    return @redis
   end
 
   def bot(name)
