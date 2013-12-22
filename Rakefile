@@ -1,13 +1,15 @@
 Bundler.require
+require 'rspec/core/rake_task'
 
-task :spec do
-end
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 desc 'Push to github'
 task :push => [:spec] do
-  # sh 'git push'
+  sh 'git push'
 end
 
 desc 'Deploy to Heroku'
