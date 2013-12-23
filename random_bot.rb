@@ -17,12 +17,15 @@ class RandomBot
       dyn = @store.get('random/dynamite_left').to_i - 1
       @store.set('random/dynamite_left', dyn)
     end
+    history = @store.get('random/moves') || ''
+    history = "#{history}[#{my_move}"
+    @store.set('random/moves', history)
     my_move
   end
 
   def opponents_move(move)
     history = @store.get('random/moves') || ''
-    history = history + ',' + move
+    history = "#{history},#{move}]\n"
     @store.set('random/moves', history)
   end
 

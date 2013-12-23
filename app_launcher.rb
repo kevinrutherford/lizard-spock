@@ -25,7 +25,7 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/' do
-    '<a href="/random">Random</a>'
+    '<a href="/random/log">Random</a>'
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
