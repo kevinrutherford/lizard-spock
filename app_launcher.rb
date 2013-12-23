@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'redis'
 require_relative 'random_bot'
+require_relative 'delayer'
 
 class LizardSpock < Sinatra::Base
 
@@ -47,7 +48,8 @@ class LizardSpock < Sinatra::Base
   def bot(name)
     if @bots.nil?
       @bots = {
-        'random' => RandomBot.new(redis)
+        'random' => RandomBot.new(redis),
+        'delayer' => Delayer.new(redis),
       }
     end
     @bots[name]
