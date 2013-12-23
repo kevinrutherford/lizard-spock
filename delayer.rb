@@ -20,6 +20,7 @@ class Delayer
     history = @store.get('delayer/moves') || ''
     history = "#{history}[#{my_move}"
     @store.set('delayer/moves', history)
+    @store.set('delayer/awaiting_oppo', 'true')
     my_move
   end
 
@@ -27,10 +28,15 @@ class Delayer
     history = @store.get('delayer/moves') || ''
     history = "#{history},#{move}]\n"
     @store.set('delayer/moves', history)
+    @store.set('delayer/awaiting_oppo', 'false')
   end
 
   def game_log
     @store.get('delayer/moves')
+  end
+
+  def awaiting_opponent
+    @store.get('delayer/awaiting_oppo') == 'true'
   end
 
   def legal_moves
