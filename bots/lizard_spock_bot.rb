@@ -9,6 +9,7 @@ class LizardSpockBot
   def start(dynamite_count)
     @store.set("#{@name}/moves", '')
     @store.set("#{@name}/dynamite_left", dynamite_count)
+    @store.set("#{@name}/oppo_last_move", '')
     @store.set("#{@name}/awaiting_oppo", 'false')
   end
 
