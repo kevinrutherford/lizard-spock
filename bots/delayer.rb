@@ -2,13 +2,13 @@ require_relative 'game_rules'
 
 class Delayer
 
-  def initialize(store, random = Random.new)
-    @store = store
+  def initialize(random = Random.new)
     @random = random
   end
 
-  def move
-    his = @store.get("delayer/oppo_last_move")
+  def move(game_state)
+    @game_state = game_state
+    his = @game_state.oppo_last_move
     if his && his.length > 0
       my = GameRules.new.moves_that_beat(his, dynamite_allowed?)
       if my.length > 0
@@ -27,7 +27,7 @@ class Delayer
   end
 
   def dynamite_allowed?
-    @store.get('delayer/dynamite_left').to_i > 0
+    @game_state.dynamite_left > 0
   end
 
 end

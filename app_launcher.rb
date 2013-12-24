@@ -57,7 +57,7 @@ class LizardSpock < Sinatra::Base
         'delayer' => Delayer,
       }
     end
-    @strategies[name].new(redis)
+    @strategies[name].new
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

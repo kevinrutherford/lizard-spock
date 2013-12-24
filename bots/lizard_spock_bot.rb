@@ -13,7 +13,7 @@ class LizardSpockBot
   end
 
   def move
-    my_move = @strategy.move
+    my_move = @strategy.move(self)
     @store.set("#{@name}/my_last_move", my_move)
     if my_move == 'DYNAMITE'
       dyn = @store.get("#{@name}/dynamite_left").to_i - 1
@@ -34,6 +34,16 @@ class LizardSpockBot
 
   def game_log
     @store.get("#{@name}/moves")
+  end
+
+  #- - - callbacks - - - 
+
+  def dynamite_left
+    @store.get("#{@name}/dynamite_left").to_i
+  end
+
+  def oppo_last_move
+    @store.get("#{@name}/oppo_last_move")
   end
 
 end
