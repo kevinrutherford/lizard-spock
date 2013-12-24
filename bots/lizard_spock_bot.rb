@@ -21,14 +21,14 @@ class LizardSpockBot
       @store.set("#{@name}/dynamite_left", dyn)
     end
     history = @store.get("#{@name}/moves") || ''
-    history = "#{history}[#{my_move}"
+    history = "#{history}[me: #{my_move}"
     @store.set("#{@name}/moves", history)
     my_move
   end
 
   def opponents_move(move)
     history = @store.get("#{@name}/moves") || ''
-    history = "#{history},#{move}]\n"
+    history = "#{history}, him: #{move}]\n"
     @store.set("#{@name}/oppo_last_move", move)
     @store.set("#{@name}/moves", history)
     @store.set("#{@name}/awaiting_oppo", 'false')
