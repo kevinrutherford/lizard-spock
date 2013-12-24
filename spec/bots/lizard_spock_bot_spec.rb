@@ -10,6 +10,12 @@ describe LizardSpockBot do
     subject.start(50)
   end
 
+  context 'at game start' do
+    it 'has no previous oppo last move' do
+      expect(store.get('fred/oppo_last_move')).to be == ''
+    end
+  end
+
   describe '#move' do
 
     it 'returns the strategys move' do
