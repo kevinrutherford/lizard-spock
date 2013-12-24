@@ -1,6 +1,6 @@
 class LizardSpockBot
 
-  def initialize(strategy)
+  def initialize(strategy, name, store)
     @strategy = strategy
   end
 

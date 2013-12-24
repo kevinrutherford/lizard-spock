@@ -11,19 +11,19 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/start' do
-    LizardSpockBot.new(strategy(params[:bot_name])).start(params['dynamiteCount'].to_i)
+    bot(params[:bot_name]).start(params['dynamiteCount'].to_i)
   end
 
   get '/:bot_name/move' do
-    LizardSpockBot.new(strategy(params[:bot_name])).move
+    bot(params[:bot_name]).move
   end
 
   post '/:bot_name/move' do
-    LizardSpockBot.new(strategy(params[:bot_name])).opponents_move(params['lastOpponentMove'])
+    bot(params[:bot_name]).opponents_move(params['lastOpponentMove'])
   end
 
   get '/:bot_name/log' do
-    "#{LizardSpockBot.new(strategy(params[:bot_name])).game_log}"
+    "#{bot(params[:bot_name]).game_log}"
   end
 
   get '/' do
@@ -44,6 +44,10 @@ class LizardSpock < Sinatra::Base
       @redis = HashStore.new
     end
     return @redis
+  end
+
+  def bot(name)
+    LizardSpockBot.new(strategy(name), name, redis)
   end
 
   def strategy(name)
