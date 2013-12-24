@@ -6,16 +6,7 @@ class RandomBot
   end
 
   def move
-    my_move = legal_moves[@random.rand(legal_moves.length)]
-    @store.set('random/my_last_move', my_move)
-    if my_move == 'DYNAMITE'
-      dyn = @store.get('random/dynamite_left').to_i - 1
-      @store.set('random/dynamite_left', dyn)
-    end
-    history = @store.get('random/moves') || ''
-    history = "#{history}[#{my_move}"
-    @store.set('random/moves', history)
-    my_move
+    legal_moves[@random.rand(legal_moves.length)]
   end
 
   def legal_moves

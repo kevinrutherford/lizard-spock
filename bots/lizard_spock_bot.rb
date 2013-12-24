@@ -13,7 +13,16 @@ class LizardSpockBot
   end
 
   def move
-    @strategy.move
+    my_move = @strategy.move
+    @store.set("#{@name}/my_last_move", my_move)
+    if my_move == 'DYNAMITE'
+      dyn = @store.get("#{@name}/dynamite_left").to_i - 1
+      @store.set("#{@name}/dynamite_left", dyn)
+    end
+    history = @store.get("#{@name}/moves") || ''
+    history = "#{history}[#{my_move}"
+    @store.set("#{@name}/moves", history)
+    my_move
   end
 
   def opponents_move(move)

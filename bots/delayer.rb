@@ -6,21 +6,7 @@ class Delayer
   end
 
   def move
-    my_move = legal_moves[@random.rand(legal_moves.length)]
-    @store.set('delayer/my_last_move', my_move)
-    if my_move == 'DYNAMITE'
-      dyn = @store.get('delayer/dynamite_left').to_i - 1
-      @store.set('delayer/dynamite_left', dyn)
-    end
-    history = @store.get('delayer/moves') || ''
-    history = "#{history}[#{my_move}"
-    @store.set('delayer/moves', history)
-    @store.set('delayer/awaiting_oppo', 'true')
-    my_move
-  end
-
-  def awaiting_opponent
-    @store.get('delayer/awaiting_oppo') == 'true'
+    legal_moves[@random.rand(legal_moves.length)]
   end
 
   def legal_moves

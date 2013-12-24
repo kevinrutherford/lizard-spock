@@ -16,23 +16,6 @@ describe Delayer do
       subject.legal_moves.should == ['ROCK', 'PAPER', 'SCISSORS', 'DYNAMITE']
     end
 
-    context 'when the move is DYNAMITE' do
-      let(:random) { double(:random, :rand => 3) }
-
-      it 'decrements the dynamite available counter' do
-        subject.move.should == 'DYNAMITE'
-        store.get('delayer/dynamite_left').should == 9
-      end
-    end
-
-    context 'when the move is not DYNAMITE' do
-
-      it ' does not decrement the dynamite available counter' do
-        subject.move.should == 'PAPER'
-        store.get('delayer/dynamite_left').should == 10
-      end
-    end
-
   end
 
   context 'when there is no dynamite left' do
