@@ -6,8 +6,8 @@ class Delayer
   end
 
   def move
-    his = @store.get("#{@name}/oppo_last_move")
-    if his.length > 0
+    his = @store.get("delayer/oppo_last_move")
+    if his && his.length > 0
       my = GameRules.new.moves_that_beat(his, dynamite_allowed?)
       if my.length > 0
         return my[0]
