@@ -1,3 +1,5 @@
+require_relative 'game_rules'
+
 class Delayer
 
   def initialize(store, random = Random.new)
