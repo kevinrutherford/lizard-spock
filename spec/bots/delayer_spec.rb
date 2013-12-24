@@ -6,27 +6,6 @@ describe Delayer do
   let(:store) { HashStore.new }
   subject { Delayer.new(store, random) }
 
-  context 'at the start' do
-    it 'should not be awaiting an opponent move' do
-      subject.start(100)
-      subject.awaiting_opponent.should be_false
-    end
-  end
-
-  context 'after an opponent move' do
-    it 'should not be awaiting an opponent move' do
-      subject.opponents_move('PAPER')
-      subject.awaiting_opponent.should be_false
-    end
-  end
-
-  context 'after my move' do
-    it 'should be awaiting an opponent move' do
-      subject.move
-      subject.awaiting_opponent.should be_true
-    end
-  end
-
   context 'when there is dynamite available' do
 
     before do

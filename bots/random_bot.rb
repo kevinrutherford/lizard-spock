@@ -5,11 +5,6 @@ class RandomBot
     @random = random
   end
 
-  def start(dynamite_count)
-    @store.set('random/moves', '')
-    @store.set('random/dynamite_left', dynamite_count)
-  end
-
   def move
     my_move = legal_moves[@random.rand(legal_moves.length)]
     @store.set('random/my_last_move', my_move)
@@ -21,12 +16,6 @@ class RandomBot
     history = "#{history}[#{my_move}"
     @store.set('random/moves', history)
     my_move
-  end
-
-  def opponents_move(move)
-    history = @store.get('random/moves') || ''
-    history = "#{history},#{move}]\n"
-    @store.set('random/moves', history)
   end
 
   def legal_moves

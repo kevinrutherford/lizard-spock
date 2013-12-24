@@ -5,12 +5,6 @@ class Delayer
     @random = random
   end
 
-  def start(dynamite_count)
-    @store.set('delayer/moves', '')
-    @store.set('delayer/dynamite_left', dynamite_count)
-    @store.set('delayer/awaiting_oppo', 'false')
-  end
-
   def move
     my_move = legal_moves[@random.rand(legal_moves.length)]
     @store.set('delayer/my_last_move', my_move)
@@ -23,14 +17,6 @@ class Delayer
     @store.set('delayer/moves', history)
     @store.set('delayer/awaiting_oppo', 'true')
     my_move
-  end
-
-  def opponents_move(move)
-    history = @store.get('delayer/moves') || ''
-    history = "#{history},#{move}]\n"
-    @store.set('delayer/oppo_last_move', move)
-    @store.set('delayer/moves', history)
-    @store.set('delayer/awaiting_oppo', 'false')
   end
 
   def awaiting_opponent
