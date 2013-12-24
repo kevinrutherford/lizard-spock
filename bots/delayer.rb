@@ -5,9 +5,9 @@ class Delayer
     @random = random
   end
 
-  def start
+  def start(dynamite_count)
     @store.set('delayer/moves', '')
-    @store.set('delayer/dynamite_left', 100)
+    @store.set('delayer/dynamite_left', dynamite_count)
   end
 
   def move

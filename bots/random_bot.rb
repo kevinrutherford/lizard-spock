@@ -5,9 +5,9 @@ class RandomBot
     @random = random
   end
 
-  def start
+  def start(dynamite_count)
     @store.set('random/moves', '')
-    @store.set('random/dynamite_left', 100)
+    @store.set('random/dynamite_left', dynamite_count)
   end
 
   def move

@@ -10,7 +10,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/start' do
-    bot(params[:bot_name]).start
+    bot(params[:bot_name]).start(params['dynamiteCount'].to_i)
   end
 
   get '/:bot_name/move' do

@@ -8,7 +8,7 @@ describe Delayer do
 
   context 'at the start' do
     it 'should not be awaiting an opponent move' do
-      subject.start
+      subject.start(100)
       subject.awaiting_opponent.should be_false
     end
   end
