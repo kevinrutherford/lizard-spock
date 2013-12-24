@@ -27,6 +27,7 @@ class Delayer
   def opponents_move(move)
     history = @store.get('delayer/moves') || ''
     history = "#{history},#{move}]\n"
+    @store.set('delayer/oppo_last_move', move)
     @store.set('delayer/moves', history)
     @store.set('delayer/awaiting_oppo', 'false')
   end
