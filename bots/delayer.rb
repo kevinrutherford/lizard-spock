@@ -33,10 +33,6 @@ class Delayer
     @store.set('delayer/awaiting_oppo', 'false')
   end
 
-  def game_log
-    @store.get('delayer/moves')
-  end
-
   def awaiting_opponent
     @store.get('delayer/awaiting_oppo') == 'true'
   end

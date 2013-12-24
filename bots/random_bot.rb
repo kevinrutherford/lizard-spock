@@ -29,10 +29,6 @@ class RandomBot
     @store.set('random/moves', history)
   end
 
-  def game_log
-    @store.get('random/moves')
-  end
-
   def legal_moves
     result = ['ROCK', 'PAPER', 'SCISSORS']
     if @store.get('random/dynamite_left').to_i > 0

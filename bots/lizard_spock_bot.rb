@@ -2,6 +2,8 @@ class LizardSpockBot
 
   def initialize(strategy, name, store)
     @strategy = strategy
+    @name = name
+    @store = store
   end
 
   def start(dynamite_count)
@@ -17,7 +19,7 @@ class LizardSpockBot
   end
 
   def game_log
-    @strategy.game_log
+    @store.get("#{@name}/moves")
   end
 
 end
