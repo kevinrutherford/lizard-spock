@@ -13,7 +13,7 @@ class LizardSpockBot
   end
 
   def opponents_move(move)
-    @strategy.opponents_move
+    @strategy.opponents_move(move)
   end
 
   def game_log
