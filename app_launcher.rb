@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require 'redis'
-require_relative 'random_bot'
-require_relative 'delayer'
+require_relative 'bots/lizard_spock_bot'
+require_relative 'bots/random_bot'
+require_relative 'bots/delayer'
 
 class LizardSpock < Sinatra::Base
 
@@ -10,19 +11,19 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/start' do
-    bot(params[:bot_name]).start(params['dynamiteCount'].to_i)
+    LizardSpockBot.new(strategy(params[:bot_name])).start(params['dynamiteCount'].to_i)
   end
 
   get '/:bot_name/move' do
-    bot(params[:bot_name]).move
+    LizardSpockBot.new(strategy(params[:bot_name])).move
   end
 
   post '/:bot_name/move' do
-    bot(params[:bot_name]).opponents_move(params['lastOpponentMove'])
+    LizardSpockBot.new(strategy(params[:bot_name])).opponents_move(params['lastOpponentMove'])
   end
 
   get '/:bot_name/log' do
-    "#{bot(params[:bot_name]).game_log}"
+    "#{LizardSpockBot.new(strategy(params[:bot_name])).game_log}"
   end
 
   get '/' do
@@ -45,14 +46,14 @@ class LizardSpock < Sinatra::Base
     return @redis
   end
 
-  def bot(name)
-    if @bots.nil?
-      @bots = {
+  def strategy(name)
+    if @strategies.nil?
+      @strategies = {
         'random' => RandomBot.new(redis),
         'delayer' => Delayer.new(redis),
       }
     end
-    @bots[name]
+    @strategies[name]
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -8,6 +8,7 @@ class Delayer
   def start(dynamite_count)
     @store.set('delayer/moves', '')
     @store.set('delayer/dynamite_left', dynamite_count)
+    @store.set('delayer/awaiting_oppo', 'false')
   end
 
   def move
