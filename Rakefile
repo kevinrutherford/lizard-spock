@@ -6,18 +6,26 @@ begin
   RSpec::Core::RakeTask.new(:spec)
 
   task :default => :spec
+
+  Dir['spec/**/*_spec.rb'].each do |s|
+    task s do
+      sh "bundle exec rspec #{s}"
+    end
+    task :allspec => [s]
+  end
+
 rescue LoadError
 end
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 desc 'Push to github'
-task :push => [:spec] do
+task :push => [:spec, :allspec] do
   sh 'git push'
 end
 
 desc 'Deploy to Heroku'
-task :deploy => [:spec, :push] do
+task :deploy => [:spec, :allspec, :push] do
   sh 'git push heroku master'
 end
 

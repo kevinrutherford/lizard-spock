@@ -27,7 +27,7 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/' do
-    '<a href="/random/log">Random</a>'
+    '<a href="/random/log">Random</a></br><a href="/delayer/log">Delayer</a>'
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -53,11 +53,11 @@ class LizardSpock < Sinatra::Base
   def strategy(name)
     if @strategies.nil?
       @strategies = {
-        'random' => RandomBot.new(redis),
-        'delayer' => Delayer.new(redis),
+        'random' => RandomBot,
+        'delayer' => Delayer,
       }
     end
-    @strategies[name]
+    @strategies[name].new
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
