@@ -7,7 +7,7 @@ describe LizardSpockBot do
   subject { LizardSpockBot.new(strategy, game) }
 
   before do
-    subject.start(50)
+    subject.start('oppo', 50)
   end
 
   context 'at game start' do

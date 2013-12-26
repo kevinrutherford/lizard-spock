@@ -7,8 +7,10 @@ class LizardSpockBot
     @game = game
   end
 
-  def start(dynamite_count)
-    @game['moves'] = ''
+  def start(oppo_name, dynamite_count)
+    @game['startTime'] = Time.now
+    @game['oppo_name'] = oppo_name
+    @game['log'] = ''
     @game['dynamite_left'] = dynamite_count
     @game['oppo_last_move'] = ''
   end
@@ -20,21 +22,21 @@ class LizardSpockBot
       dyn = @game['dynamite_left'].to_i - 1
       @game['dynamite_left'] = dyn
     end
-    history = @game['moves'] || ''
+    history = @game['log'] || ''
     history = "#{history}{me: #{my_move}"
-    @game['moves'] = history
+    @game['log'] = history
     my_move
   end
 
   def opponents_move(move)
-    history = @game['moves'] || ''
+    history = @game['log'] || ''
     history = "#{history}, him: #{move}}\n"
     @game['oppo_last_move'] = move
-    @game['moves'] = history
+    @game['log'] = history
   end
 
   def game_log
-    @game['moves']
+    @game['log']
   end
 
   #- - - callbacks - - -

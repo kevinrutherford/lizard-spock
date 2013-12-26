@@ -11,7 +11,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/start' do
-    bot(params[:bot_name]).start(params['dynamiteCount'].to_i)
+    bot(params[:bot_name]).start(params['opponentName'], params['dynamiteCount'].to_i)
   end
 
   get '/:bot_name/move' do
@@ -23,7 +23,8 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/:bot_name/log' do
-    "#{bot(params[:bot_name]).game_log}"
+    name = params[:bot_name]
+    "#{bot(name).game_log}"
   end
 
   get '/' do
@@ -32,22 +33,26 @@ class LizardSpock < Sinatra::Base
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  def redis
-    return @redis if @redis
+  def persistent_store
+    return @persistent_store if @persistent_store
     redisUri = ENV['REDISTOGO_URL'] || 'redis://localhost:6379'
     uri = URI.parse(redisUri)
     begin
-      @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-      @redis.keys
+      @persistent_store = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+      @persistent_store.keys
     rescue
       require_relative 'hash_store'
-      @redis = HashStore.new
+      @persistent_store = HashStore.new
     end
-    return @redis
+    return @persistent_store
+  end
+
+  def game(name, persistent_store)
+    Game.new(name, persistent_store)
   end
 
   def bot(name)
-    LizardSpockBot.new(strategy(name), Game.new(name, redis))
+    LizardSpockBot.new(strategy(name), game(name, persistent_store))
   end
 
   def strategy(name)
