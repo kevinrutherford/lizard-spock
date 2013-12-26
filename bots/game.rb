@@ -13,6 +13,18 @@ class Game
     @store.get(personal(key))
   end
 
+  def log(item)
+    time = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    record = "#{time} :: #{item}"
+    log = game_log || []
+    log << record
+    @store.set(personal('log'), log)
+  end
+
+  def game_log
+    @store.get(personal('log'))
+  end
+
   private
 
   def personal(key)
