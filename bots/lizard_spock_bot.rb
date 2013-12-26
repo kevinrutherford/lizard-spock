@@ -1,4 +1,4 @@
-require_relative 'game_store'
+require_relative 'game'
 
 class LizardSpockBot
 

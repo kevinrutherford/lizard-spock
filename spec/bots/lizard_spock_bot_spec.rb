@@ -2,7 +2,7 @@ require_relative '../../hash_store'
 require_relative '../../bots/lizard_spock_bot'
 
 describe LizardSpockBot do
-  let(:game) { GameStore.new('fred', HashStore.new) }
+  let(:game) { Game.new('fred', HashStore.new) }
   let(:strategy) { double(:strategy, move: 'DYNAMITE') }
   subject { LizardSpockBot.new(strategy, game) }
 

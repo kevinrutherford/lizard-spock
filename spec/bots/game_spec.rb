@@ -1,10 +1,10 @@
-require_relative '../../bots/game_store'
+require_relative '../../bots/game'
 require_relative '../../hash_store'
 
-describe GameStore do
+describe Game do
 
   let(:store) { HashStore.new }
-  subject { GameStore.new('fred', store) }
+  subject { Game.new('fred', store) }
   let(:thing) { { a: 12, b: 'xyzzy' } }
 
   before do
@@ -17,7 +17,7 @@ describe GameStore do
 
   context 'when two game stores share the same underlying store' do
 
-    let(:jim) { GameStore.new('jim', store) }
+    let(:jim) { Game.new('jim', store) }
 
     it 'keeps their values separate' do
       jim['thing'] = 42

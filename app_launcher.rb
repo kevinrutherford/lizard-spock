@@ -47,7 +47,7 @@ class LizardSpock < Sinatra::Base
   end
 
   def bot(name)
-    LizardSpockBot.new(strategy(name), GameStore.new(name, redis))
+    LizardSpockBot.new(strategy(name), Game.new(name, redis))
   end
 
   def strategy(name)

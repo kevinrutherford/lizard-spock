@@ -1,4 +1,4 @@
-class GameStore
+class Game
 
   def initialize(base_key, store)
     @base_key = base_key
