@@ -4,21 +4,10 @@ class RandomBot
     @random = random
   end
 
-  def move(game_state)
-    @game_state = game_state
+  def move(game)
+    legal_moves = ['ROCK', 'PAPER', 'SCISSORS']
+    legal_moves << 'DYNAMITE' if game.dynamite_left > 0
     legal_moves[@random.rand(legal_moves.length)]
-  end
-
-  def legal_moves
-    result = ['ROCK', 'PAPER', 'SCISSORS']
-    if dynamite_allowed?
-      result << 'DYNAMITE'
-    end
-    result
-  end
-
-  def dynamite_allowed?
-    @game_state.dynamite_left > 0
   end
 
 end

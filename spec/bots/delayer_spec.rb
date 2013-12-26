@@ -3,7 +3,7 @@ require_relative '../../bots/delayer'
 
 describe Delayer do
   let(:random) { double(:random, :rand => 1) }
-  let(:state) { double(:game_state, oppo_last_move: 'PAPER', dynamite_left: 0) }
+  let(:state) { double(:game, oppo_last_move: 'PAPER', dynamite_left: 0) }
   subject { Delayer.new(random) }
 
   context 'when there is no dynamite left' do

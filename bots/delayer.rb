@@ -6,9 +6,9 @@ class Delayer
     @random = random
   end
 
-  def move(game_state)
-    @game_state = game_state
-    his = @game_state.oppo_last_move
+  def move(game)
+    @game = game
+    his = @game.oppo_last_move
     if his && his.length > 0
       my = GameRules.new.moves_that_beat(his, dynamite_allowed?)
       if my.length > 0
@@ -18,16 +18,16 @@ class Delayer
     legal_moves[@random.rand(legal_moves.length)]
   end
 
+  private
+
   def legal_moves
     result = ['ROCK', 'PAPER', 'SCISSORS']
-    if dynamite_allowed?
-      result << 'DYNAMITE'
-    end
+    result << 'DYNAMITE' if dynamite_allowed?
     result
   end
 
   def dynamite_allowed?
-    @game_state.dynamite_left > 0
+    @game.dynamite_left > 0
   end
 
 end
