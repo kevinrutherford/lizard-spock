@@ -6,11 +6,17 @@ class GameStore
   end
 
   def []=(key, value)
-    @store.set("#{@base_key}/#{key}", value)
+    @store.set(personal(key), value)
   end
 
   def [](key)
-    @store.get("#{@base_key}/#{key}")
+    @store.get(personal(key))
+  end
+
+  private
+
+  def personal(key)
+    "#{@base_key}/#{key}"
   end
 
 end

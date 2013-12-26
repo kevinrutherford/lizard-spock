@@ -1,9 +1,10 @@
+require_relative 'game_store'
+
 class LizardSpockBot
 
-  def initialize(strategy, name, store)
+  def initialize(strategy, game)
     @strategy = strategy
-    @name = name
-    @game = GameStore.new(name, store)
+    @game = game
   end
 
   def start(dynamite_count)
@@ -36,14 +37,14 @@ class LizardSpockBot
     @game['moves']
   end
 
-  #- - - callbacks - - - 
+  #- - - callbacks - - -
 
   def dynamite_left
-    @store.get("#{@name}/dynamite_left").to_i
+    @game['dynamite_left'].to_i
   end
 
   def oppo_last_move
-    @store.get("#{@name}/oppo_last_move")
+    @game['oppo_last_move']
   end
 
 end
