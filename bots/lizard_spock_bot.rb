@@ -1,16 +1,19 @@
 require_relative 'game'
+require_relative 'game_log'
 
 class LizardSpockBot
 
   def initialize(strategy, game)
     @strategy = strategy
     @game = game
+    @log = GameLog.new(@game)
   end
 
   def start(oppo_name, dynamite_count)
     @game['startTime'] = Time.now
     @game['oppo_name'] = oppo_name
-    @game['log'] = ''
+    @log.clear
+    @log.record "New game: opponent: #{oppo_name}"
     @game['dynamite_left'] = dynamite_count
     @game['oppo_last_move'] = ''
   end
@@ -22,21 +25,17 @@ class LizardSpockBot
       dyn = @game['dynamite_left'].to_i - 1
       @game['dynamite_left'] = dyn
     end
-    history = @game['log'] || ''
-    history = "#{history}{me: #{my_move}"
-    @game['log'] = history
+    @log.record "my move: #{my_move}"
     my_move
   end
 
   def opponents_move(move)
-    history = @game['log'] || ''
-    history = "#{history}, him: #{move}}\n"
     @game['oppo_last_move'] = move
-    @game['log'] = history
+    @log.record "his move: #{move}"
   end
 
   def game_log
-    @game['log']
+    @log.all_items
   end
 
   #- - - callbacks - - -

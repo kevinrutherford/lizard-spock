@@ -27,13 +27,5 @@ describe Game do
 
   end
 
-  context 'logging' do
-    it 'logs multiple things' do
-      subject.log 'one'
-      subject.log 'two'
-      expect(subject.game_log[0]).to match(/one$/)
-    end
-  end
-
 end
 

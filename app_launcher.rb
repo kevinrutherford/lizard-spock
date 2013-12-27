@@ -10,6 +10,10 @@ class LizardSpock < Sinatra::Base
     enable :logging
   end
 
+  get '/:bot_name/start' do                         # TESTING ONLY!!!
+    bot(params[:bot_name]).start('fred', 100)
+  end
+
   post '/:bot_name/start' do
     bot(params[:bot_name]).start(params['opponentName'], params['dynamiteCount'].to_i)
   end
