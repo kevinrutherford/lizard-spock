@@ -11,7 +11,7 @@ class GameLog
   end
 
   def record(item)
-    time = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    time = Time.now.strftime('%Y-%m-%d %H:%M:%S.%L')
     record = "#{time} :: #{item}"
     log = all_items
     log << record
