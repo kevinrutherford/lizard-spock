@@ -23,7 +23,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/:bot_name/move' do
-    bot(params[:bot_name]).opponents_move(params['lastOpponentMove'])
+    bot(params[:bot_name]).opponents_move(params['lastOpponentMove'], params['round'])
   end
 
   get '/:bot_name/log' do

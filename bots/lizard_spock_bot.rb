@@ -29,9 +29,9 @@ class LizardSpockBot
     my_move
   end
 
-  def opponents_move(move)
+  def opponents_move(move, round)
     @game['oppo_last_move'] = move
-    @log.record "his move: #{move}"
+    @log.record "his move (#{round}): #{move}"
   end
 
   def game_log
