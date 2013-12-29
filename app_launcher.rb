@@ -1,22 +1,27 @@
 require 'sinatra/base'
+require_relative 'bots/game'
 
 class LizardSpock < Sinatra::Base
 
   configure :production, :development do
     enable :logging
+    set :game, Game.new
   end
 
   post '/start' do
+    settings.game.start(params[opponentName])
   end
 
   get '/move' do
-    move = 'SCISSORS'
-    logger.info "======= me: #{move}"
-    move
+    settings.game.move
   end
 
   post '/move' do
-    logger.info "======= him: #{params['lastOpponentMove']} (#{params['round']}), "
+    settings.game.oppo_move(params['lastOpponentMove'], params['round'])
+  end
+
+  get '/' do
+    settings.game.log
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

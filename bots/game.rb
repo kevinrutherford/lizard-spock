@@ -1,22 +1,29 @@
 class Game
 
-  def initialize(base_key, store)
-    @base_key = base_key
-    @store = store
+  def start(name)
+    @log = "New game vs #{name}, "
   end
 
-  def []=(key, value)
-    @store.set(personal(key), value)
+  def move
+    move = 'SCISSORS'
+    record "me: #{move}, "
+    move
   end
 
-  def [](key)
-    @store.get(personal(key))
+  def oppo_move(move, round)
+    record "him: #{move} (#{round}), "
+  end
+
+  def log
+    @log
   end
 
   private
 
-  def personal(key)
-    "#{@base_key}/#{key}"
+  def record(str)
+    cur = @log || ''
+    cur += str
+    @log = cur
   end
 
 end
