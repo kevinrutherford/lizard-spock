@@ -7,7 +7,7 @@ class Game
   def start(params)
     @start_time = Time.now
     @opponent = params['opponentName']
-    @dynamite_count = params['dynamiteCount'] || 100
+    @dynamite_count = params['dynamiteCount'].to_i || 100
     @log = []
     record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"

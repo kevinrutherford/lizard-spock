@@ -8,7 +8,7 @@ describe Game do
   describe 'random_move' do
 
     it 'returns PAPER' do
-      subject.start('opponentName' => 'dick', 'dynamiteCount' => 20)
+      subject.start('opponentName' => 'dick', 'dynamiteCount' => '20')
       expect(subject.random_move).to be == 'PAPER'
     end
   end
