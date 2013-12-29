@@ -23,6 +23,10 @@ task :start do
   sh "curl -d opponentName=fred http://localhost:5000/start"
 end
 
+task :move do
+  sh "curl -d lastOpponentMove=ROCK http://localhost:5000/move"
+end
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 desc 'Push to github'

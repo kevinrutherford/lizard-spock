@@ -1,6 +1,7 @@
 class Game
 
   def start(params)
+    @start_time = Time.now
     @opponent = params['opponentName']
     @dynamite_count = params['dynamiteCount'] || 100
     @log = []
@@ -10,16 +11,24 @@ class Game
 
   def move
     move = generate_move
-    record "me: #{move}, "
+    @my_last_move = move
     move
   end
 
   def oppo_move(move, round)
-    record "him: #{move} (#{round}), "
+    record "me: #{@my_last_move} him: #{move} (#{round}), "
   end
 
   def log
     @log
+  end
+
+  def start_time
+    @start_time
+  end
+
+  def opponent
+    @opponent
   end
 
   private

@@ -1,4 +1,8 @@
-- records.each do |rec|
+%h1
+  = game.opponent
+%p
+  = game.start_time.strftime('%Y-%m-%d %H:%M:%S')
+- game.log.each do |rec|
   = rec
   %br
 

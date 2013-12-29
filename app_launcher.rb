@@ -22,7 +22,7 @@ class LizardSpock < Sinatra::Base
 
   get '/' do
     haml :index, locals: {
-      records: settings.game.log
+      game: settings.game
     }
   end
 
