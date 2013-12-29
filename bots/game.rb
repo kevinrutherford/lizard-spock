@@ -1,5 +1,9 @@
 class Game
 
+  def initialize
+    @random = Random.new
+  end
+
   def start(params)
     @start_time = Time.now
     @opponent = params['opponentName']
@@ -12,6 +16,7 @@ class Game
   def move
     move = generate_move
     @my_last_move = move
+    @dynamite_count -= 1 if move == 'DYNAMITE'
     move
   end
 
@@ -34,7 +39,20 @@ class Game
   private
 
   def generate_move
-    'SCISSORS'
+    case @opponent
+    when 'Botulism'
+      'SCISSORS'
+    when 'Botswana'
+      'PAPER'
+    else
+      random_move
+    end
+  end
+
+  def random_move
+    moves = ['ROCK', 'PAPER', 'SCISSORS']
+    moves << 'DYNAMITE' if @dynamite_count > 0
+    moves[@random.rand(moves.length)]
   end
 
   def record(str)
