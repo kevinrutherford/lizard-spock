@@ -19,7 +19,7 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/' do
-    @@moves
+    @@moves || ''
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
