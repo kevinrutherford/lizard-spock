@@ -1,11 +1,13 @@
 class Game
 
-  def start(name)
-    @log = "New game vs #{name}, "
+  def start(params)
+    @opponent = params[opponentName]
+    @dynamite_count = params[dynamiteCount]
+    @log = "New game vs #{@opponent}, "
   end
 
   def move
-    move = 'SCISSORS'
+    move = generate_move
     record "me: #{move}, "
     move
   end
@@ -19,6 +21,10 @@ class Game
   end
 
   private
+
+  def generate_move
+    'SCISSORS'
+  end
 
   def record(str)
     cur = @log || ''

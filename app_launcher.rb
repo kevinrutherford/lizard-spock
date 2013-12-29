@@ -9,7 +9,7 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/start' do
-    settings.game.start(params['opponentName'])
+    settings.game.start(params)
   end
 
   get '/move' do
