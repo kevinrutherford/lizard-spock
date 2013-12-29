@@ -19,6 +19,12 @@ end
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+task :start do
+  sh "curl -d opponentName=fred http://localhost:5000/start"
+end
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 desc 'Push to github'
 task :push => [:spec, :allspec] do
   sh 'git push'

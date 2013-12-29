@@ -2,8 +2,9 @@ class Game
 
   def start(params)
     @opponent = params['opponentName']
-    @dynamite_count = params['dynamiteCount']
+    @dynamite_count = params['dynamiteCount'] || 100
     @log = "New game vs #{@opponent}, "
+    record "Dynamite count = #{@dynamite_count}"
   end
 
   def move
