@@ -7,19 +7,16 @@ class LizardSpock < Sinatra::Base
   end
 
   post '/start' do
-    @@moves = ''
   end
 
   get '/move' do
-    'SCISSORS'
+    move = 'SCISSORS'
+    logger.info "======= me: #{move}"
+    move
   end
 
   post '/move' do
-    @@moves += "#{params['lastOpponentMove']} (#{params['round']}), "
-  end
-
-  get '/' do
-    @@moves || ''
+    logger.info "======= him: #{params['lastOpponentMove']} (#{params['round']}), "
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
