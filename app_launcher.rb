@@ -21,7 +21,9 @@ class LizardSpock < Sinatra::Base
   end
 
   get '/' do
-    settings.game.log
+    haml :index, locals: {
+      records: settings.game.log
+    }
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

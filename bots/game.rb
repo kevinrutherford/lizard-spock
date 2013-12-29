@@ -3,7 +3,8 @@ class Game
   def start(params)
     @opponent = params['opponentName']
     @dynamite_count = params['dynamiteCount'] || 100
-    @log = "New game vs #{@opponent}, "
+    @log = []
+    record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"
   end
 
@@ -28,8 +29,8 @@ class Game
   end
 
   def record(str)
-    cur = @log || ''
-    cur += str
+    cur = @log || []
+    cur << str
     @log = cur
   end
 
