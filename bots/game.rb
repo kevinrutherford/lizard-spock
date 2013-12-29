@@ -1,7 +1,7 @@
 class Game
 
-  def initialize
-    @random = Random.new
+  def initialize(random = Random.new)
+    @random = random
   end
 
   def start(params)
@@ -21,6 +21,7 @@ class Game
   end
 
   def oppo_move(move, round)
+    @oppo_last_move = move
     record "me: #{@my_last_move} him: #{move} (#{round}), "
   end
 
@@ -36,6 +37,12 @@ class Game
     @opponent
   end
 
+  def random_move
+    moves = ['ROCK', 'PAPER', 'SCISSORS']
+    moves << 'DYNAMITE' if @dynamite_count > 0
+    moves[@random.rand(moves.length)]
+  end
+
   private
 
   def generate_move
@@ -44,15 +51,11 @@ class Game
       'SCISSORS'
     when 'Botswana'
       'PAPER'
+    when 'FATBOTSLIM'
+      @oppo_last_move || random_move
     else
       random_move
     end
-  end
-
-  def random_move
-    moves = ['ROCK', 'PAPER', 'SCISSORS']
-    moves << 'DYNAMITE' if @dynamite_count > 0
-    moves[@random.rand(moves.length)]
   end
 
   def record(str)
