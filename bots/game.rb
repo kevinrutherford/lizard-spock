@@ -1,3 +1,5 @@
+require_relative 'game_rules'
+
 class Game
 
   def initialize(random = Random.new)
@@ -52,7 +54,8 @@ class Game
     when 'Botswana'
       'PAPER'
     when 'FATBOTSLIM'
-      'ROCK' # @oppo_last_move || random_move
+      # @oppo_last_move || random_move
+      GameRules.new.moves_that_beat(@oppo_last_move, @dynamite_count > 0)[0]
     else
       random_move
     end
