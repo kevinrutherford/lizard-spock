@@ -52,7 +52,7 @@ class Game
     when 'Botswana'
       'PAPER'
     when 'FATBOTSLIM'
-      @oppo_last_move || random_move
+      'ROCK' # @oppo_last_move || random_move
     else
       random_move
     end
