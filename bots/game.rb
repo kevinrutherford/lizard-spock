@@ -56,7 +56,8 @@ class Game
     when 'FATBOTSLIM'
       # @oppo_last_move || random_move
       # GameRules.new.moves_that_beat(@oppo_last_move, @dynamite_count > 0)[0]
-      @dynamite_count > 0 ? 'DYNAMITE' : random_move
+      # @dynamite_count > 0 ? 'DYNAMITE' : random_move
+      GameRules.new.moves_that_lose_to(@my_last_move, @dynamite_count > 0)[0]
     else
       random_move
     end
