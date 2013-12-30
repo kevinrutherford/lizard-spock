@@ -1,8 +1,14 @@
-%h1
-  = game.opponent
-%p
-  = game.start_time.strftime('%Y-%m-%d %H:%M:%S')
-- game.log.each do |rec|
-  = rec
-  %br
+- if game.opponent
+  %h1
+    = game.opponent
+  %p
+    = game.start_time.strftime('%Y-%m-%d %H:%M:%S')
+  - game.log.each do |rec|
+    = rec
+    %br
+
+- else
+
+  %p
+    No game started yet.
 
