@@ -46,6 +46,10 @@ class Game
     moves[@random.rand(moves.length)]
   end
 
+  def oppo_can_use_dynamite?
+    @oppo_dynamite > 0
+  end
+
   private
 
   def generate_move
@@ -56,7 +60,7 @@ class Game
       'PAPER'
     when 'FATBOTSLIM'
       if @my_last_move == @oppo_last_move
-        return 'WATERBOMB' if @oppo_dynamite > 0
+        return 'WATERBOMB' if oppo_can_use_dynamite?
         return 'DYNAMITE' if @dynamite_count > 0
       end
       random_move
