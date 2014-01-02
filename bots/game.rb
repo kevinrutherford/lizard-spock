@@ -13,7 +13,6 @@ class Game
     @log = []
     record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"
-    @draws = 0
   end
 
   def move
@@ -27,7 +26,6 @@ class Game
     @oppo_last_move = move
     @oppo_dynamite -= 1 if move == 'DYNAMITE'
     record "me: #{@my_last_move} him: #{move} (#{round}), "
-    @draws += 1 if @my_last_move == @oppo_last_move
   end
 
   def log
@@ -57,12 +55,8 @@ class Game
     when 'Botswana'
       'PAPER'
     when 'FATBOTSLIM'
-      # @oppo_last_move || random_move
-      # GameRules.new.moves_that_beat(@oppo_last_move, @dynamite_count > 0)[0]
-      # @dynamite_count > 0 ? 'DYNAMITE' : random_move
       return 'WATERBOMB' if ((@my_last_move == @oppo_last_move) && (@oppo_dynamite > 0))
       return 'DYNAMITE' if @dynamite_count > 0
-      # GameRules.new.moves_that_lose_to(@my_last_move, @dynamite_count > 0)[0]
       random_move
     else
       random_move
