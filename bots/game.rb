@@ -55,8 +55,10 @@ class Game
     when 'Botswana'
       'PAPER'
     when 'FATBOTSLIM'
-      return 'WATERBOMB' if ((@my_last_move == @oppo_last_move) && (@oppo_dynamite > 0))
-      return 'DYNAMITE' if @dynamite_count > 0
+      if @my_last_move == @oppo_last_move
+        return 'WATERBOMB' if @oppo_dynamite > 0
+        return 'DYNAMITE' if @dynamite_count > 0
+      end
       random_move
     else
       random_move
