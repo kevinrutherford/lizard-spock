@@ -47,6 +47,11 @@ class Game
     moves[@random.rand(moves.length)]
   end
 
+  def random_standard_move
+    moves = ['ROCK', 'PAPER', 'SCISSORS']
+    moves[@random.rand(moves.length)]
+  end
+
   def oppo_can_use_dynamite?
     @oppo_dynamite > 0
   end
@@ -68,11 +73,10 @@ class Game
 
   def fatbotslim
     if @my_last_move == @oppo_last_move
-      record "Draw: my dynamite = #{@dynamite_count}, his dynamite = #{@oppo_dynamite}"
       return 'WATERBOMB' if oppo_can_use_dynamite?
       return 'DYNAMITE' if @dynamite_count > 0
     end
-    random_move
+    random_standard_move
   end
 
   def record(str)

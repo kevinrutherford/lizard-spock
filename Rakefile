@@ -20,7 +20,7 @@ end
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 task :start do
-  sh "curl -d opponentName=fred http://localhost:5000/start"
+  sh "curl -d 'opponentName=FATBOTSLIM\ndynamiteCount=100' http://localhost:5000/start"
 end
 
 task :move do
