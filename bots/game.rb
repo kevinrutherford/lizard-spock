@@ -28,7 +28,8 @@ class Game
     @oppo_last_move = move
     @oppo_dynamite -= 1 if move == 'DYNAMITE'
     @oppo_draw_response = move if @last_was_draw
-    record "me: #{@my_last_move} him: #{move} (#{round}), "
+    extra = @my_last_move == @oppo_last_move ? ' ---------------- DRAW' : ''
+    record "me: #{@my_last_move} him: #{move} (#{round})#{extra}"
   end
 
   def log
