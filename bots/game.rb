@@ -11,6 +11,7 @@ class Game
     @opponent = params['opponentName']
     @dynamite_count = params['dynamiteCount'].to_i || 100
     @oppo_dynamite = @dynamite_count
+    @last_was_draw = false
     @log = []
     record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"
@@ -26,6 +27,7 @@ class Game
   def oppo_move(move, round)
     @oppo_last_move = move
     @oppo_dynamite -= 1 if move == 'DYNAMITE'
+    @oppo_draw_response = move if @last_was_draw
     record "me: #{@my_last_move} him: #{move} (#{round}), "
   end
 
@@ -73,10 +75,13 @@ class Game
 
   def fatbotslim
     if @my_last_move == @oppo_last_move
-      return 'WATERBOMB' if oppo_can_use_dynamite?
+      @last_was_draw = true
+      return 'WATERBOMB' if @oppo_draw_response == 'DYNAMITE'
       return 'DYNAMITE' if @dynamite_count > 0
+    else
+      @last_was_draw = false
+      random_standard_move
     end
-    random_standard_move
   end
 
   def record(str)
