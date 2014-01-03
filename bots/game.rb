@@ -80,8 +80,8 @@ class Game
       return 'DYNAMITE' if @dynamite_count > 0
     else
       @last_was_draw = false
-      random_standard_move
     end
+    random_standard_move
   end
 
   def record(str)
