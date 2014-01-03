@@ -9,7 +9,8 @@ class Game
   def start(params)
     @start_time = Time.now
     @opponent = params['opponentName']
-    @oppo_dynamite = @dynamite_count = params['dynamiteCount'].to_i || 100
+    @dynamite_count = params['dynamiteCount'].to_i || 100
+    @oppo_dynamite = @dynamite_count
     @log = []
     record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"
@@ -59,14 +60,19 @@ class Game
     when 'Botswana'
       'PAPER'
     when 'FATBOTSLIM'
-      if @my_last_move == @oppo_last_move
-        return 'WATERBOMB' if oppo_can_use_dynamite?
-        return 'DYNAMITE' if @dynamite_count > 0
-      end
-      random_move
+      fatbotslim
     else
       random_move
     end
+  end
+
+  def fatbotslim
+    if @my_last_move == @oppo_last_move
+      record "Draw: my dynamite = #{@dynamite_count}, his dynamite = #{@oppo_dynamite}"
+      return 'WATERBOMB' if oppo_can_use_dynamite?
+      return 'DYNAMITE' if @dynamite_count > 0
+    end
+    random_move
   end
 
   def record(str)
