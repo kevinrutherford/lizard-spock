@@ -62,19 +62,6 @@ class Game
   private
 
   def generate_move
-    case @opponent
-    when 'Botulism'
-      'SCISSORS'
-    when 'Botswana'
-      'PAPER'
-    when 'FATBOTSLIM'
-      fatbotslim
-    else
-      random_move
-    end
-  end
-
-  def fatbotslim
     if @my_last_move == @oppo_last_move
       @last_was_draw = true
       return 'WATERBOMB' if @oppo_draw_response == 'DYNAMITE'
