@@ -4,6 +4,7 @@ class Game
 
   def initialize(random = Random.new)
     @random = random
+    @log = []
   end
 
   def start(params)
@@ -12,7 +13,6 @@ class Game
     @dynamite_count = params['dynamiteCount'].to_i || 100
     @oppo_dynamite = @dynamite_count
     @last_was_draw = false
-    @log = []
     record "New game vs #{@opponent}, "
     record "Dynamite count = #{@dynamite_count}"
   end
