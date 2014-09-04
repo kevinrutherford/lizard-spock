@@ -1,4 +1,4 @@
-ruby '1.9.3'
+ruby '2.1.2'
 
 source 'http://rubygems.org'
 
@@ -10,4 +10,5 @@ group :development, :test do
   gem 'rspec'
   gem 'shoulda', :require => false
 end
+
 
