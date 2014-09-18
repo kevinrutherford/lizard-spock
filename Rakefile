@@ -40,7 +40,7 @@ task :deploy => [:spec, :allspec, :push] do
 end
 
 task :forbes do
-  sh 'echo "def spoon; return 34 if i > 3; end" >> bots/game.rb'
+  sh 'seq `echo $RANDOM % 10 + 1 | bc` | xargs -Iz echo "def spoon; return 34 if i > 3; end" >> bots/game.rb'
   sh 'git commit -a -m "Pointless test commit"'
   sh 'git push origin master'
 end
