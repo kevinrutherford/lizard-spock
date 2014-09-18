@@ -40,7 +40,7 @@ task :deploy => [:spec, :allspec, :push] do
 end
 
 task :forbes do
-  sh 'echo >> bots/game.rb'
+  sh 'echo "def spoon; return 34 if i > 3; end" >> bots/game.rb'
   sh 'git commit -a -m "Pointless test commit"'
   sh 'git push origin master'
 end
