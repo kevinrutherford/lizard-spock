@@ -40,7 +40,7 @@ task :deploy => [:spec, :allspec, :push] do
 end
 
 task :forbes do
-  sh 'echo >> Gemfile'
+  sh 'echo >> bots/game.rb'
   sh 'git commit -a -m "Pointless test commit"'
   sh 'git push origin master'
 end
