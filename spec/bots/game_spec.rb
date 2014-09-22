@@ -1,6 +1,5 @@
 require_relative '../../bots/game'
 
-
 describe Game do
 
   let(:random) { double(:random, rand: 1) }
