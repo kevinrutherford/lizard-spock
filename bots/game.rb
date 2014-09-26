@@ -102,3 +102,66 @@ end
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+>>>>>>> bf773014b28d79fbdcd39d3f99adaf8d4f3b1677
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
