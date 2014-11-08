@@ -81,3 +81,12 @@ class Game
 end
 
 def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
+def spoon; return 34 if i > 3; end
